@@ -1,0 +1,338 @@
+{% if section.settings.background %}
+<style>
+  .heading-content{
+    background-image:  url({{ section.settings.background | img_url: '', crop: '' }}) !important; 
+  }
+</style>
+{% endif %}
+<div class="about-content">
+  {% if section.settings.quote_enable %}
+  <div class="quote-layout">
+    <div class="container">
+      <div class="row">
+        <div class="quote-inner">
+          <div class="quote-content">
+            <p class="title">{{ section.settings.quote_title }}</p>
+            <div class="name-position">{{ section.settings.quote_name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.our_enable or section.settings.info_enable %}
+  <div class="info-layout">
+    <div class="container">
+      <div class="row">
+        <div class="info-inner">
+          <div class="info-content">
+            <div class="info-left">
+              {% if section.settings.info_image %}
+              <div class="info-image">
+                <img src="{{ section.settings.info_image | img_url: '', crop: 'center' }}" alt="{{ section.settings.info_image.alt }}" />
+              </div>
+              {% endif %}
+              {% if section.settings.info_enable %}
+              <div class="group_info">
+                <div class="info-contact">
+                  <div class="contact-item">
+                    <span class="title">{{ section.settings.address_title }}</span>
+                    <address>{{ section.settings.address_caption }}</address>
+                  </div>
+                  <div class="contact-item">
+                    <span class="title">{{ section.settings.phone_title }}</span>
+                    <div>{{ section.settings.phone_caption }}</div>
+                  </div>
+                  <div class="contact-item">
+                    <span class="title">{{ section.settings.email_title }}</span>
+                    <a href="mailto:{{ section.settings.email_caption }}">{{ section.settings.email_caption }}</a>
+                  </div>
+                </div>
+                <div class="info-social">
+                  <span class="title">{{ section.settings.social_title }}</span>
+                  <div class="social-content">
+                    {% if section.settings.social_facebook_link != blank %}<a href="{{ section.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="cs-icon icon-social-facebook"></i></a>{% endif %}
+                    {% if section.settings.social_twitter_link != blank %}<a href="{{ section.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="cs-icon icon-social-twitter"></i></a>{% endif %}            
+                    {% if section.settings.social_google_plus_link != blank %}<a href="{{ section.settings.social_google_plus_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Google+' }}" class="icon-social google-plus"><i class="cs-icon icon-social-googleplus"></i></a>{% endif %}                        
+                    {% if section.settings.social_pinterest_link != blank %}<a href="{{ section.settings.social_pinterest_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Pinterest' }}" class="icon-social pinterest"><i class="cs-icon icon-social-pinterest"></i></a>{% endif %}
+                    {% if section.settings.social_instagram_link != blank %}<a href="{{ section.settings.social_instagram_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Instagram' }}" class="icon-social instagram"><i class="cs-icon icon-social-instagram"></i></a>{% endif %}                                    
+                    {% if section.settings.social_youtube_link != blank %}<a href="{{ section.settings.social_youtube_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Youtube' }}" class="icon-social youtube"><i class="cs-icon icon-social-youtube"></i></a>{% endif %}	
+                    {% if section.settings.social_wordpress_link != blank %}<a href="{{ section.settings.social_wordpress_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Wordpress' }}" class="icon-social wordpress"><i class="cs-icon icon-social-wordpress"></i></a>{% endif %}
+                    {% if section.settings.social_vimeo_link != blank %}<a href="{{ section.settings.social_vimeo_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Vimeo' }}" class="icon-social vimeo"><i class="cs-icon icon-social-vimeo"></i></a>{% endif %}	
+                    {% if section.settings.social_tumblr_link != blank %}<a href="{{ section.settings.social_tumblr_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Tumblr' }}" class="icon-social tumblr"><i class="cs-icon icon-social-tumblr"></i></a>{% endif %}
+                  </div>
+                </div>
+              </div>              
+              {% endif %}
+            </div>
+            <div class="info-right">
+              {% if section.settings.our_image %}              
+              <div class="info-image">
+                <img src="{{ section.settings.our_image | img_url: '', crop: 'center' }}" alt="{{ section.settings.our_image.alt }}" />
+              </div>
+              {% endif %}
+              {% if section.settings.our_enable %}
+              <div class="info-our">
+                <h2 class="our-title">{{ section.settings.our_title }}</h2>
+                <p class="our-caption">{{ section.settings.our_caption }}</p>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.team_enable %}
+  <div class="team-layout">
+    <div class="container">
+      <div class="row">
+        <div class="team-title">
+          <h2 class="title">
+            {{ section.settings.team_title }}
+          </h2>
+        </div>  
+        <div class="team-inner">
+          <div class="team-content about-team-slider">
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            <div class="team-item">
+              <div class="avatar">
+                <img src="{{ block.settings.avatar | img_url: '', crop: 'center' }}" alt="{{ block.settings.avatar.alt }}" />
+              </div>
+              <div class="content">
+                <p class="name">
+                  {{ block.settings.name }}
+                </p>
+                <p class="position">
+                  {{ block.settings.position }}
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+  $(".about-team-slider").owlCarousel({
+    navigation : false,
+    pagination: true,
+    items: 4,
+    slideSpeed : 200,
+    paginationSpeed : 800,
+    rewindSpeed : 1000,
+    itemsDesktop : [1199,4],
+    itemsTablet: [768,3],
+    itemsTabletSmall: [540,2],
+    itemsMobile : [360,2]
+  });
+</script>
+{% schema %}
+{
+  "name": "About Page",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "You need create the Page in Admin Panel and set the layout is page.about"
+    },
+	{
+      "type": "image_picker",
+      "id": "background",
+      "label": "Upload background of breadcrumb"
+	},
+    {
+      "type": "header",
+      "content": "Quote Store"
+    },
+    {
+      "type": "checkbox",
+      "id": "quote_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "quote_name",
+      "label": "Name and Position ( HTML )"
+    },
+	{
+      "type": "header",
+      "content": "Our Story"
+    },
+    {
+      "type": "checkbox",
+      "id": "our_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "our_title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "our_caption",
+      "label": "Caption"
+    },
+	{
+      "type": "image_picker",
+      "id": "our_image",
+      "label": "Upload image banner"
+    },
+	{
+      "type": "header",
+      "content": "Information Store"
+    },
+    {
+      "type": "checkbox",
+      "id": "info_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "image_picker",
+      "id": "info_image",
+      "label": "Upload image banner"
+    },
+	{
+      "type": "text",
+      "id": "address_title",
+      "label": "Address: Title"
+    },
+	{
+      "type": "text",
+      "id": "address_caption",
+      "label": "Address: Caption"
+    },
+	{
+      "type": "text",
+      "id": "phone_title",
+      "label": "Phone: Title"
+    },
+	{
+      "type": "textarea",
+      "id": "phone_caption",
+      "label": "Phone: Caption ( HTML )"
+    },
+	{
+      "type": "text",
+      "id": "email_title",
+      "label": "Email: Title"
+    },
+	{
+      "type": "text",
+      "id": "email_caption",
+      "label": "Email: Caption"
+    },
+	{
+      "type": "text",
+      "id": "social_title",
+      "label": "Social: Title"
+    },
+	{
+      "type": "text",
+      "id": "social_twitter_link",
+      "label": "Twitter",
+      "info": "https:\/\/twitter.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_facebook_link",
+      "label": "Facebook",
+      "info": "https:\/\/www.facebook.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_pinterest_link",
+      "label": "Pinterest",
+      "info": "https:\/\/www.pinterest.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_google_plus_link",
+      "label": "Google+",
+      "info": "https:\/\/plus.google.com\/+shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram_link",
+      "label": "Instagram",
+      "info": "https:\/\/instagram.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_tumblr_link",
+      "label": "Tumblr",
+      "info": "http:\/\/shopify.tumblr.com"
+    },
+    {
+      "type": "text",
+      "id": "social_youtube_link",
+      "label": "YouTube",
+      "info": "https:\/\/www.youtube.com\/user\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_wordpress_link",
+      "label": "Wordpress",
+      "info": "http:\/\/wordpress.org\/"
+    },
+    {
+      "type": "text",
+      "id": "social_vimeo_link",
+      "label": "Vimeo",
+      "info": "https:\/\/vimeo.com\/shopify"
+    },
+    {
+      "type": "header",
+      "content": "Our team"
+    },
+    {
+      "type": "checkbox",
+      "id": "team_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "team_title",
+      "label": "Title"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add staff in Blocks"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "staff",
+      "name": "Staff",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "position",
+          "label": "Position"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}  

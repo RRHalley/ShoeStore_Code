@@ -1,0 +1,38 @@
+<section class="heading-content blog-heading">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ blog.title }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{{ blog.url }}" title="{{ blog.title }}" itemprop="url">
+                  <span itemprop="title">{{ blog.title }}</span>
+                </a>
+              </span>
+            </div>         
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog-content">
+  <div class="blog-wrapper">
+    <div class="container">
+      <div class="row">
+        {% if settings.blog_style == 'grid' %}
+          {% section 'blog-grid-template' %}
+        {% elsif settings.blog_style == 'grid_sidebar' %}
+          {% section 'blog-gridsidebar-template' %}
+        {% elsif settings.blog_style == 'list_sidebar' %}
+          {% section 'blog-listsidebar-template' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,399 @@
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <section class="main-header">
+    <div class="main-header-wrapper">
+      <div class="container clearfix">
+        <div class="row">
+          <div class="main-header-inner">            
+            <div class="nav-logo">
+              {% if section.settings.logo %}
+              <a href="/"><img src="{{ section.settings.logo | img_url: "", crop: '' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+              {% else %}
+              <a href="/"><img src="{{ '191x56.png' | asset_url | split:'?v=' | first }}" alt="{{ section.settings[logo].alt }}"/></a>
+              {% endif %}
+              {% if template == 'index' %}
+              <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+              {% else %}
+              <div style="display:none"><a href="/">{{ shop.name }}</a></div>
+              {% endif %}
+            </div>
+            <div class="nav-menu">
+              <ul class="navigation-links ">
+                {% capture menu_label_1 %},{{ settings.menu_label_1 | split: ' ' }},{% endcapture %}
+                {% capture menu_label_2 %},{{ settings.menu_label_2 | split: ' ' }},{% endcapture %}
+                {% for l in linklists[settings.nav_linklist].links %}
+                {% include 'header-navigation' %}
+                {% endfor %}
+              </ul> 
+            </div>                       
+            <div class="nav-icon">
+              {% if settings.display_search %}
+              <div class="m_search search-icon">
+                <a href="" data-toggle="modal" data-target="#lightbox-search">
+                  <i class="cs-icon icon-search"></i>
+                </a>
+              </div>
+              {% endif %} 
+              <div class="icon_cart">
+                <div class="m_cart-group">
+                  <a class="cart dropdown-toggle dropdown-link" data-toggle="dropdown">
+                    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                    <i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+                    <div class="num-items-in-cart">
+                      <i class="cs-icon icon-shopping-cart"></i>
+                      <span class="cart_text"> 
+                        <span class="number">{{ cart.item_count }}</span>                      
+                      </span>
+                    </div>
+                  </a>
+                  <div class="dropdown-menu cart-info">                  
+                    <div class="cart-content">
+                      <div class="loading">
+                        <img src="{{'loader.gif' | asset_url}}" alt="" />
+                      </div>
+                    </div>                  
+                  </div>
+                </div>
+              </div>
+              <div class="icon_info">                    
+                <a href="javascript:void(0)" class="show-info">
+                  <i class="cs-icon icon-view-list"></i>
+                </a>
+              </div>
+            </div>                        
+          </div>
+          <div class="navMobile-navigation">     
+            <div class="nav-icon">
+              <div class="nav-icon-left">
+                <div class="group_navbtn_small group_navbtn_action">              
+                  <a href="javascript:void(0)" class="dropdown-toggle-navigation">                  
+                    <span class="cs-icon icon-menu"></span>
+                    <i class="sub-dropdown1"></i>
+                    <i class="sub-dropdown"></i> 
+                  </a>
+                  <div class="navigation_dropdown_scroll dropdown-menu">
+                    <div class="navigation_dropdown_scroll_group">
+                      <div class="navigation_links_top">
+                        <div class="dropdownMobile-logo">
+                          {% if section.settings.logo %}
+                          <a href="/"><img class="header-logo-image" src="{{ section.settings.logo | img_url: "", crop: 'center' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+                          {% else %}
+                          <div><a href="/">{{ shop.name }}</a></div>
+                          {% endif %}
+                        </div>
+                        <a href="javascript:void(0)" class="close-navigation-dropdown"><span class="cs-icon icon-close"></span></a>
+                      </div>
+                      <ul class="navigation_links_mobile">
+                        {% assign nav_lv = 0 %}
+                        {% for l in linklists[settings.nav_linklist].links %}
+                        {% include 'header-navigation-mobile' %}
+                        {% endfor %}
+                      </ul> 
+                    </div>                  
+                  </div>
+                </div> 
+                {% if settings.display_search %}
+                <div class="m_search search-tablet-icon">
+                  <span class="dropdownMobile-toggle search-dropdown">
+                    <span class="icon-dropdown cs-icon icon-search" data-class="cs-icon icon-search"></span>
+                    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                    <i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+                  </span>                    
+                  <div class="m_dropdown-search dropdown-menu search-content">
+                    <form class="search" action="/search">
+                      <input type="hidden" name="type" value="product" />                        
+                      <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}"  />
+                      <span class="search-clear cs-icon icon-close"></span>
+                      <button class="search-submit" type="submit">
+                        <span class="cs-icon icon-search"></span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                {% endif %} 
+              </div>
+              <div class="navMobile-logo-small">
+                {% if section.settings.logo %}
+                <a href="/"><img class="header-logo-image" src="{{ section.settings.logo | img_url: "", crop: 'center' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+                {% else %}
+                <div><a href="/">{{ shop.name }}</a></div>
+                {% endif %}
+              </div> 
+              <div class="nav-icon-right">
+                <div class="icon_cart">
+                  <div class="m_cart-group">
+                    <a class="cart dropdownMobile-toggle dropdown-link">
+                      <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                      <i class="sub-dropdown visible-sm visible-md visible-lg"></i>                     
+                      <div class="items-cart">
+                        <div class="num-items-in-cart">
+                          <span class="cs-icon icon-shopping-cart"></span>
+                          <span class="cart_text">                                              
+                            <span class="number">{{ cart.item_count }}</span>                        
+                          </span>
+                        </div>                      
+                      </div>                    
+                    </a>
+                    <div class="dropdown-menu cart-info">                  
+                      <div class="cart-content">
+                        <div class="loading">
+                          <img src="{{'loader.gif' | asset_url}}" alt="" />
+                        </div>
+                      </div>                  
+                    </div>
+                  </div>
+                </div>
+                <div class="icon_info">                    
+                  <a href="javascript:void(0)" class="show-info">
+                    <i class="cs-icon icon-view-list"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="info-header">
+    <div class="info-header-wrapper">
+      <a href="javascript:void(0)" class="close-info"><span class="cs-icon icon-close"></span></a>
+      <div class="info-header-content">
+        {% if settings.show_multiple_currencies %}
+        <ul class="currencies currencies-content">
+          {% capture codes %},USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK,{% endcapture %}
+          {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+          <li class="currency-{{shop.currency}} active">
+            <a href="javascript:;">{{ shop.currency }}</a>
+            <input type="hidden" value="{{ shop.currency }}" />
+          </li>
+          {% for code in supported_codes %}
+          {% if code != shop.currency and codes contains code %}
+          <li class="currency-{{code}}">
+            <a href="javascript:;">{{ code }}</a>
+            <input type="hidden" value="{{ code }}" />
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <!-- Customer Links -->
+        <ul class="unstyled accounts-content">
+          {% if shop.customer_accounts_enabled %}
+          {% if customer  %}
+          <li class="toolbar-customer my-account"><a href="/account">{{ 'layout.customer.your_account' | t }}</a></li>
+          <li class="toolbar-customer log-out"><a href="/account/logout">{{ 'layout.customer.logout' | t }}</a></li>
+          {% else %}
+          <li class="toolbar-customer login-account"><a href="/account/login">{{ 'layout.customer.login' | t }}</a></li>
+          <li class="toolbar-customer register-account"><a href="/account/register">{{ 'layout.customer.create_account' | t }}</a></li>
+          {% endif %}
+          {% endif %}
+          <li class="toolbar-customer wishlist"><a href="/pages/wish-list">{{ 'layout.customer.wishlist' | t }}</a></li>
+          <li class="toolbar-customer compare"><a href="/pages/compare">{{ 'layout.customer.compare' | t }}</a></li>
+        </ul>
+        {% if section.settings.contact_enable %}
+        <div class="info-contact">
+          <h5 class="header-title">{{ section.settings.contact_title }}</h5>
+          <div class="contact-content">
+            <div class="item">
+              <span>A: </span> <address>{{ section.settings.contact_address }}</address>
+            </div>
+            <div class="item">
+              <span>P: </span> <a href="tel:{{ section.settings.contact_phone }}">{{ section.settings.contact_phone }}</a>
+            </div>
+            <div class="item">
+              <span>E: </span><a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if section.settings.social_enable %}
+        <div class="info-social">
+          <h5 class="header-title">{{ section.settings.social_title }}</h5>
+          <div class="social-content">
+            {% if section.settings.social_facebook_link != blank %}<a href="{{ section.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="cs-icon icon-social-facebook"></i></a>{% endif %}
+            {% if section.settings.social_twitter_link != blank %}<a href="{{ section.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="cs-icon icon-social-twitter"></i></a>{% endif %}            
+            {% if section.settings.social_google_plus_link != blank %}<a href="{{ section.settings.social_google_plus_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Google+' }}" class="icon-social google-plus"><i class="cs-icon icon-social-googleplus"></i></a>{% endif %}                        
+            {% if section.settings.social_pinterest_link != blank %}<a href="{{ section.settings.social_pinterest_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Pinterest' }}" class="icon-social pinterest"><i class="cs-icon icon-social-pinterest"></i></a>{% endif %}
+            {% if section.settings.social_instagram_link != blank %}<a href="{{ section.settings.social_instagram_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Instagram' }}" class="icon-social instagram"><i class="cs-icon icon-social-instagram"></i></a>{% endif %}                                    
+            {% if section.settings.social_youtube_link != blank %}<a href="{{ section.settings.social_youtube_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Youtube' }}" class="icon-social youtube"><i class="cs-icon icon-social-youtube"></i></a>{% endif %}	
+            {% if section.settings.social_wordpress_link != blank %}<a href="{{ section.settings.social_wordpress_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Wordpress' }}" class="icon-social wordpress"><i class="cs-icon icon-social-wordpress"></i></a>{% endif %}
+            {% if section.settings.social_vimeo_link != blank %}<a href="{{ section.settings.social_vimeo_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Vimeo' }}" class="icon-social vimeo"><i class="cs-icon icon-social-vimeo"></i></a>{% endif %}	
+            {% if section.settings.social_tumblr_link != blank %}<a href="{{ section.settings.social_tumblr_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Tumblr' }}" class="icon-social tumblr"><i class="cs-icon icon-social-tumblr"></i></a>{% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if settings.nav_sticky %}
+<script type="text/javascript">
+  function addTopaffix(scr){
+    if(scr < 10 ){
+      if($('#top').hasClass('affix-top')){
+        $('#top').removeClass('affix affix-top').removeClass('fadeInDown animated');
+      }
+    }
+    else{
+      if(!$('#top').hasClass('affix-top')){
+        $('#top').addClass('affix affix-top').addClass('fadeInDown animated').removeClass('fadeInUp-affix');
+      }
+    }
+  }
+  function addBottomaffix(scr){
+    if($(window).innerWidth() >= 992 ){
+      if(scr > 0 && scr < 115 ){
+        if(!$('#top').hasClass('affix-top')){
+          $('#top').addClass('affix affix-top').addClass('fadeInDown animated').removeClass('fadeInUp-affix');
+        }
+      }
+      else{
+        if($('#top').hasClass('affix-top')){
+          $('#top').removeClass('affix-top').removeClass('fadeInDown animated').addClass('fadeInUp-affix animated');
+        }
+      }
+    }
+    else {
+      if($('#top').hasClass('affix')){
+        $('#top').removeClass('affix-top').removeClass('fadeInDown animated').addClass('fadeInUp-affix animated');
+      }
+    }
+  }
+  var checks = 0;
+  $(window).scroll(function() {
+    var scrollTop = $(this).scrollTop();
+    if(scrollTop > checks){
+      addBottomaffix(scrollTop);
+    }
+    else if(scrollTop < checks){
+      addTopaffix(scrollTop);
+    }
+    checks = scrollTop;
+  });
+  $( window ).resize(function() {
+    var scrollTop = $(this).scrollTop();
+    if(scrollTop > checks){
+      addBottomaffix(scrollTop);
+    }
+    else if(scrollTop < checks){
+      addTopaffix(scrollTop);
+    }
+    checks = scrollTop;
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+"name": "Header",
+"settings": [
+{
+"type": "header",
+"content": "Logo Shop"
+},
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Logo image"
+},
+{
+"type": "header",
+"content": "Contact Us"
+},
+{
+"type": "checkbox",
+"id": "contact_enable",
+"label": "Set active this block"
+},
+{
+"type": "text",
+"id": "contact_title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "contact_address",
+"label": "Address"
+},
+{
+"type": "text",
+"id": "contact_phone",
+"label": "Phone"
+},
+{
+"type": "text",
+"id": "contact_email",
+"label": "Email"
+},
+{
+"type": "header",
+"content": "Social"
+},
+{
+"type": "checkbox",
+"id": "social_enable",
+"label": "Set active this block"
+},
+{
+"type": "text",
+"id": "social_title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "social_twitter_link",
+"label": "Twitter",
+"info": "https:\/\/twitter.com\/shopify"
+},
+{
+"type": "text",
+"id": "social_facebook_link",
+"label": "Facebook",
+"info": "https:\/\/www.facebook.com\/shopify"
+},
+{
+"type": "text",
+"id": "social_pinterest_link",
+"label": "Pinterest",
+"info": "https:\/\/www.pinterest.com\/shopify"
+},
+{
+"type": "text",
+"id": "social_google_plus_link",
+"label": "Google+",
+"info": "https:\/\/plus.google.com\/+shopify"
+},
+{
+"type": "text",
+"id": "social_instagram_link",
+"label": "Instagram",
+"info": "https:\/\/instagram.com\/shopify"
+},
+{
+"type": "text",
+"id": "social_tumblr_link",
+"label": "Tumblr",
+"info": "http:\/\/shopify.tumblr.com"
+},
+{
+"type": "text",
+"id": "social_youtube_link",
+"label": "YouTube",
+"info": "https:\/\/www.youtube.com\/user\/shopify"
+},
+{
+"type": "text",
+"id": "social_wordpress_link",
+"label": "Wordpress",
+"info": "http:\/\/wordpress.org\/"
+},
+{
+"type": "text",
+"id": "social_vimeo_link",
+"label": "Vimeo",
+"info": "https:\/\/vimeo.com\/shopify"
+}
+]
+}
+{% endschema %}

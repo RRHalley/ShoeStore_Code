@@ -1,0 +1,306 @@
+{% assign submenu = l.title | handleize %}
+
+{% capture l_title %},{{ l.title | split: ' ' }},{% endcapture %}
+
+{% if settings.mega1_title == l.title %}
+<li class="{% if l.active %}active {% endif %}dropdown mega-menu megamenu-1-content">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+    <p>
+      {{ l.title }}
+      {% if menu_label_1 contains l_title %}
+      <span class="menu-label label-sale">{{ settings.new_text }}</span>
+      {% endif %}
+      {% if menu_label_2 contains l_title %}
+      <span class="menu-label label-hot">{{ settings.hot_text }}</span>
+      {% endif %}
+    </p>
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
+  </a>
+  <div class="megamenu-container megamenu-container-1 dropdown-menu" {% if settings.mega1_col3_banner %}style="background-image:  url({{ settings.mega1_col3_banner | img_url: '', crop: '' | split:'?v=' | first }})"{% endif %}>
+    <div class="sub-mega-menu-wrapper">
+      <ul class="sub-mega-menu">
+        {% if settings.mega1_col1_linklist != "" %}
+        <li class="mega-links mega1-collumn col-sm-4">
+          {% assign list = linklists[settings.mega1_col1_linklist] %}
+          <ul>
+            <li class="list-title">
+              {{ list.title }}
+            </li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega1_col2_linklist != "" %}
+        <li class="mega-links mega1-collumn col-sm-4">
+          {% assign list = linklists[settings.mega1_col2_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>    
+  </div>  
+</li>
+{% elsif settings.mega2_title == l.title %}
+<li class="{% if l.active %}active {% endif %}dropdown mega-menu megamenu-2-content">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+    <p>
+      {{ l.title }}
+      {% if menu_label_1 contains l_title %}
+      <span class="menu-label label-sale">{{ settings.new_text }}</span>
+      {% endif %}
+      {% if menu_label_2 contains l_title %}
+      <span class="menu-label label-hot">{{ settings.hot_text }}</span>
+      {% endif %}
+    </p>
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
+  </a>
+  <div class="megamenu-container megamenu-container-2 dropdown-menu" {% if settings.mega2_col4_banner %}style="background-image:  url({{ settings.mega2_col4_banner | img_url: '', crop: '' | split:'?v=' | first }})"{% endif %}>
+    <div class="sub-mega-menu-wrapper">
+      <ul class="sub-mega-menu">
+        {% if settings.mega2_col1_linklist != "" %}
+        <li class="mega-links mega2-collumn col-sm-3">
+          {% assign list = linklists[settings.mega2_col1_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega2_col2_linklist != "" %}
+        <li class="mega-links mega2-collumn col-sm-3">
+          {% assign list = linklists[settings.mega2_col2_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega2_col3_linklist != "" %}
+        <li class="mega-links mega2-collumn col-sm-3">
+          {% assign list = linklists[settings.mega2_col3_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>  
+</li>	
+{% elsif settings.mega3_title == l.title %}
+<li class="{% if l.active %}active {% endif %}dropdown mega-menu megamenu-3-content">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+    <p>
+      {{ l.title }}
+      {% if menu_label_1 contains l_title %}
+      <span class="menu-label label-sale">{{ settings.new_text }}</span>
+      {% endif %}
+      {% if menu_label_2 contains l_title %}
+      <span class="menu-label label-hot">{{ settings.hot_text }}</span>
+      {% endif %}
+    </p>    
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
+  </a>
+  <div class="megamenu-container megamenu-container-3 dropdown-menu" {% if settings.mega3_col5_banner %}style="background-image:  url({{ settings.mega3_col5_banner | img_url: '', crop: '' | split:'?v=' | first }})"{% endif %}>
+    <div class="sub-mega-menu-wrapper">
+      <ul class="sub-mega-menu">
+        {% if settings.mega3_col1_linklist != "" %}
+        <li class="mega-links mega3-collumn">
+          {% assign list = linklists[settings.mega3_col1_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega3_col2_linklist != "" %}
+        <li class="mega-links mega3-collumn">
+          {% assign list = linklists[settings.mega3_col2_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega3_col3_linklist != "" %}
+        <li class="mega-links mega3-collumn">
+          {% assign list = linklists[settings.mega3_col3_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega3_col4_linklist != "" %}
+        <li class="mega-links mega3-collumn">
+          {% assign list = linklists[settings.mega3_col4_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+                {% capture link_title %},{{ link.title | split: ' ' }},{% endcapture %}
+                {% if menu_label_1 contains link_title %}
+                <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+                {% endif %}
+                {% if menu_label_2 contains link_title %}
+                <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+                {% endif %}
+              </a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>  
+</li>
+{% elsif linklists[submenu].links.size > 0 %}
+<li class="nav-item{% if l.active %} active{% endif %} dropdown navigation">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
+    <p>
+      {{ l.title }}
+      {% if menu_label_1 contains l_title %}
+      <span class="menu-label label-sale">{{ settings.new_text }}</span>
+      {% endif %}
+      {% if menu_label_2 contains l_title %}
+      <span class="menu-label label-hot">{{ settings.hot_text }}</span>
+      {% endif %}
+    </p>
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
+  </a>
+  <ul class="dropdown-menu">    
+    {% for l in linklists[submenu].links %}
+    {% include 'navigation-sub-links' with forloop.index %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+<li class="nav-item{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}">
+    <p>
+      {{ l.title }}
+      {% if menu_label_1 contains l_title %}
+      <span class="menu-label label-sale">{{ settings.new_text }}</span>
+      {% endif %}
+      {% if menu_label_2 contains l_title %}
+      <span class="menu-label label-hot">{{ settings.hot_text }}</span>
+      {% endif %}
+    </p>
+  </a>
+</li>
+{% endif %}

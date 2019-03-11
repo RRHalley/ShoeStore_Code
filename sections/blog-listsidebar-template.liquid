@@ -1,0 +1,60 @@
+<div class="blog-inner">
+  <div id="blog" class="blog-list-sidebar">   
+    {% paginate blog.articles by 5 %}
+    <div class="col-sm-9 articles">
+      <div class="articles-group">
+        <div class="articles-group-inner">
+          {% for article in blog.articles %}
+          <div class="article">
+            {% if article.image %}
+            <div class="group-blog-left">
+              <div class="top-banner article_banner_show article-image"> 
+                <a href="{{ article.url }}">
+                  <img src="{{article.image | img_url: 'master'}}" alt="" />
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            <div class="group-blog-right {% unless article.image %}group-blog-full{% endunless %}">
+              <span class="blog-title">
+                {{ blog.title }}
+              </span>
+              <div class="article-title">                     
+                <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+              </div>
+              {% unless article.image %}
+              <div class="article-description">
+                {{ article.content | strip_html | truncatewords : 30 }}
+              </div>
+              {% endunless %}
+              <ul class="article-info list-inline">
+                <li class="article-date">
+                  <i class="fa fa-calendar-check-o"></i>
+                  {{article.published_at | date: '%b %d, %Y'}}
+                </li> 
+                <li class="article-author">
+                  <i class="fa fa-user"></i>
+                  {{article.author}}
+                </li> 
+                <li class="article-comment">
+                  <span>
+                    <a href="{{article.url}}#comments">
+                      <i class="fa fa-comments-o"></i>
+                      <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                    </a>
+                  </span>
+                </li>                                          
+              </ul>
+            </div>               
+          </div> 
+          {% endfor %}
+        </div>                  
+      </div>     
+      {% include 'pagination' %}
+    </div> 
+    <div class="col-sm-3 sidebar-blog sidebar">
+      {% include 'blog-sidebar' %}
+    </div>
+    {% endpaginate %}                        
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{% assign submenu = l.title | handleize %}
+{% capture l_title %},{{ l.title | split: ' ' }},{% endcapture %}
+{% if linklists[submenu].links.size > 0 %}
+<li class="{% if l.active %}active{% endif %} dropdown li-sub-mega">
+  <a href="{{ l.url }}">
+    <span>{{ l.title }}</span>
+    {% if menu_label_1 contains l_title %}
+    <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+    {% endif %}
+    {% if menu_label_2 contains l_title %}
+    <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+    {% endif %}
+    <span class="icon-small icon-small-angle-right"></span>
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
+  </a>
+  <ul class="dropdown-menu">
+    {% for l in linklists[submenu].links %}
+    {% include 'navigation-sub-links' %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+<li class="{% if l.active %}active {% endif %}li-sub-mega">
+  <a tabindex="-1" href="{{ l.url }}">
+    {{ l.title }}
+    {% if menu_label_1 contains l_title %}
+    <span class="submenu-label label-sale">{{ settings.new_text }}</span>
+    {% endif %}
+    {% if menu_label_2 contains l_title %}
+    <span class="submenu-label label-hot">{{ settings.hot_text }}</span>
+    {% endif %}
+  </a>
+</li>
+{% endif %}

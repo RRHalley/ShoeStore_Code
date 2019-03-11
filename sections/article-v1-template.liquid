@@ -1,0 +1,169 @@
+<div class="article-inner article-sidebar" itemscope itemtype="http://schema.org/NewsArticle">
+  <meta itemprop="datePublished" content="{{article.created_at | date: ''}}"/>
+  <meta itemprop="dateModified" content="{{article.published_at | date: ''}}"/>
+  <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{ article.url }}"/>
+  {% paginate article.comments by 100 %}
+  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="https:{{article.image | img_url: 'master'}}">
+    </div>
+    <meta itemprop="name" content="Shopify">
+  </div>
+  <div class="article-content">
+    <div class="col-sm-9 article">
+      <!-- Begin article -->
+      <div class="article-body clearfix">
+        <div class="group-blog-top">
+          <div class="top-banner article_banner_show article-image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">  
+            <img src="{{article.image | img_url: 'master'}}" alt="" />
+            <meta itemprop="url" content="https:{{article.image | img_url: 'master'}}">
+            <meta itemprop="width" content="863">
+    		<meta itemprop="height" content="575">
+          </div>
+          <span class="blog-title">
+            {{ blog.title }}
+          </span>
+          <div class="article-title">                    
+            <h1 class="article-name" itemprop="headline">{{ article.title }}</h1>
+          </div>
+          <ul class="article-info list-inline">
+            <li class="article-date">
+              <i class="fa fa-calendar-check-o"></i>
+              {{article.published_at | date: '%b %d, %Y'}}
+            </li> 
+            <li class="article-author">
+              <i class="fa fa-user"></i>
+              {{article.author}}
+            </li> 
+            <li class="article-comment">
+              <span>
+                <a href="{{article.url}}#comments">
+                  <i class="fa fa-comments-o"></i>
+                  <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                </a>
+              </span>
+            </li>                                          
+          </ul>
+        </div>
+        <div class="articleinfo_group">
+          <div class="article-description" itemprop="description">
+            {{ article.content }}
+          </div>
+          <div class="group-blog-btm">  
+            <div class="tags-area col-sm-6">
+              <span class="btm-title"><i class="cs-icon icon-ios-pricetags"></i></span>
+              {% for tag in article.tags %}
+              {% if tag == article.tags.last %} {{ tag | link_to_tag: tag }} {% else %} {{ tag | link_to_tag: tag }} {% endif%}
+              {% endfor %}
+            </div>
+            {% if settings.social_sharing_blog %}
+            <div class="share-with supports-fontface col-sm-6">
+              <span class="btm-title">
+                <i class="cs-icon icon-share-alt"></i>
+                {{ 'blogs.article.share' | t }}
+              </span>
+              <div class="share-content hover">
+                {% include 'social-sharing-product' %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>                
+      </div>
+      <!-- End article -->  
+      <!-- Related Posts  -->
+      <div class="related-body clearfix">
+        <span class="related-title article-title"><h2>{{ 'blogs.article.related_post' |t }}</h2></span>
+        <div class="related-content">
+          <div class="related-content-inner related-blog-slider">
+          {% for related in blog.articles %}           
+          {% if related.id != article.id %}
+          <div class="related-inner">
+            {% include 'article-related' %}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+      <!-- End Related Posts -->
+      <!-- Begin comments -->
+      {% if blog.comments_enabled? %}
+      <div id="comments" class="comments">
+
+        {% if article.comments.size > 0 or comment.created_at %}
+        <h2 class="article-title page-title"><span>{{ 'blogs.comments.title' | t }}</span></h2>
+        {% if comment and comment.created_at %}
+        <div id="comment-{{ comment.id }}" class="comment border-bottom clearfix">
+          <h3 class="author">
+            {% capture comment_date %}<strong><time datetime=\"{{ comment.created_at | date: format: 'short' }}\">{{ comment.created_at | date: format: 'short' }}</time></strong>{% endcapture %}{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: comment_date }}</h3>
+          <div>{{ comment.content }}</div>
+        </div> <!-- /.comment -->
+        {% endif %}
+        {% for comment in article.comments %}
+        <div id="comment-{{ comment.id }}" class="comment border-bottom clearfix">
+          <div class="cmt-author"><b>{{ comment.author }}</b></div>                    
+          <div class="cmt-date">
+            <span class="date-hour">
+              {{ comment.created_at | date: '%H:%M'}}  
+            </span>
+            <span class="date-day">
+              {{ comment.created_at | date: '%A.%d %B %Y'}}  
+            </span>
+          </div>                       
+          <div class="cmt-content">{{ comment.content }}</div>                     
+        </div>
+        {% endfor %}
+        {% include 'pagination' %}
+
+        {% endif %}
+        <div class="comment_form">
+          {% form "new_comment", article %}
+          <h2 class="article-title page-title"><span>{{ 'blogs.comments.form_title' | t }}</span></h2>    
+          <div class="group_form">
+            {% if form.posted_successfully? %}
+            {% if blog.moderated? %}
+            <div class="col-sm-12">
+              <p class="subtext success">{{ 'blogs.comments.success_moderated' | t }}</p>
+            </div>
+            {% else %}
+            <div class="col-sm-12">
+              <p class="subtext success">{{ 'blogs.comments.success' | t }}</p>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% if form.errors %}
+            <div class="col-sm-12">
+              <p class="subtext error">{{ 'blogs.comments.error' | t }}</p>
+            </div>                  
+            {% endif %}
+            <div class="col-sm-6">              
+              <input type="text" placeholder="{{ 'blogs.comments.name' | t }}" id="comment_author" name="comment[author]" size="40" class="text" />
+            </div>
+            <div class="col-sm-6">              
+              <input type="text" placeholder="{{ 'blogs.comments.email' | t }}" id="comment_email" name="comment[email]" size="40" class="text" />
+            </div>                          
+            <div class="col-sm-12">              
+              <textarea id="comment_body" placeholder="{{ 'blogs.comments.message' | t }}" name="comment[body]" cols="40" rows="5" class="text">{{form.body}}</textarea>
+            </div>
+            <div class="col-sm-12">
+              <input type="submit" value="{{ 'blogs.comments.post' | t }}" class="_btn" id="comment-submit" />
+            </div>
+            {% if blog.moderated? %}
+            <div class="col-sm-12">
+              <div class="notice">{{ 'blogs.comments.moderated' | t }}</div>
+            </div>
+            {% endif %}
+          </div>
+          {% endform %}
+        </div>
+      </div> 
+      {% endif %}
+      <!-- End comments -->
+    </div>  
+    <div class="col-sm-3 sidebar-blog sidebar">
+      {% include 'blog-sidebar' %}
+    </div> 
+  </div>
+  {% endpaginate %}          
+</div>

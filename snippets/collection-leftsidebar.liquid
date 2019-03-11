@@ -1,0 +1,99 @@
+{% if settings.collection_colllist_show %}
+<div class="sidebar-block collection-block">
+  <h3 class="sidebar-title">
+    <span class="text">{{ 'collections.general.collection_listing' |t }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">
+    <ul class="list-cat">
+      {% if collection.handle == 'all' %}
+      <li class="active"><a href="/collections/all"><span>{{ 'collections.general.allcollections' |t }}</span><span> ({{ collections.all.products_count}})</span></a></li>
+      {% else %}
+      <li><a href="/collections/all"><span>{{ 'collections.general.allcollections' |t }} </span><span> ({{ collections.all.products_count}}) </span></a></li>
+      {% endif %}
+      {% for coll in collections %}  
+      {% unless coll.all_products_count == 0 or coll.handle == "frontpage" %}
+      {% if coll.handle == collection.handle %}
+      <li class="active"><a href="{{ coll.url}}"><span>{{ coll.title }}</span><span> ({{ coll.products_count}})</span></a></li>
+      {% else %}
+      <li><a href="{{ coll.url}}"><span>{{ coll.title }} </span><span>({{ coll.products_count}})</span></a></li>
+      {% endif %}
+      {% endunless %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if settings.collection_latest_show %}
+<div class="sidebar-block latest-block">
+  <h3 class="sidebar-title">
+    <span class="text">{{ settings.collection_latest_title }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">    
+    <div class="latest-inner">
+      {% for product in collections[settings.collection_latest_product].products limit:3 %} 
+      <div class="products-item">
+        {% include 'index-product-right' %} 
+      </div>
+      {% endfor %}
+    </div>           
+  </div>
+</div>
+{% endif %}
+
+{% if settings.collection_filter_show %}
+  {% if template contains 'product' %}
+	{% include 'product-tag-filter' %}
+  {% else %}
+    {% include 'collection-tag-filter' %}
+  {% endif %}
+{% endif %}
+
+{% if settings.collection_type_show %}
+<div class="sidebar-block type-block">
+  <h3 class="sidebar-title">
+    <span class="text">{{ 'collections.general.type_title' |t }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">    
+    <ul class="type-content">
+      <!--type-->
+      {% for product_type in shop.types %}
+      <li class="{% if collection.current_type == product_type %}active{% endif %}">
+        {{ product_type | link_to_type }}
+      </li>
+      {% endfor %}
+    </ul>       
+  </div>
+</div>
+{% endif %}
+
+{% if settings.collection_vendor_show %}
+<div class="sidebar-block vendor-block">
+  <h3 class="sidebar-title">
+    <span class="text">{{ 'collections.general.vendor_title' |t }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">    
+    <ul class="vendor-content">
+      <!--vendor-->
+      {% for vendor in shop.vendors %}
+      <li class="{% if collection.current_vendor == vendor %}active{% endif %}">
+        {{ vendor | link_to_vendor }}
+      </li>
+      {% endfor %}
+    </ul>       
+  </div>
+</div>
+{% endif %}
+
+<div class="sidebarMobile sidebar-bottom">
+  <button class="sidebarMobile-clear _btn">
+    {{'collections.general.clear_all'|t}}
+  </button>
+  <button class="sidebarMobile-close _btn">
+    {{'collections.general.apply_close'|t}}
+  </button>
+</div>

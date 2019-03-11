@@ -1,0 +1,295 @@
+<section class="page-content">
+  <div class="page-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-inner">
+          <div id="page">
+            <div class="details">              
+              {{ page.content }}
+            </div>
+          </div>
+
+          <div class="service-content layout_content">
+            {% if section.settings.service_our_enable %}
+            <div class="our-content">
+              <div class="service-title page-title">
+                <span>{{section.settings.service_our_title}}</span>
+              </div>
+              <div class="group_layout_inner">              
+                {% for i in (1..6) %}
+                {% capture icon %}service_our{{ i }}_icon{% endcapture %}
+                {% capture caption %}service_our{{ i }}_caption{% endcapture %}
+                <div class="our-inner layout-inner col-sm-6">
+                  <div class="our-icon layout-icon">
+                    <div class="group_icon">
+                      {{section.settings[icon]}}
+                    </div>
+                  </div>
+                  <div class="our-caption layout_caption">
+                    {{section.settings[caption]}}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+            {% if section.settings.service_more_enable %}
+            <div class="more-content">
+              <div class="service-title page-title">
+                <span>{{section.settings.service_more_title}}</span>
+              </div>
+              <div class="group_layout_inner">              
+                {% for i in (1..4) %}
+                {% capture image %}service_more{{ i }}{% endcapture %}
+                {% capture caption %}service_more{{ i }}_caption{% endcapture %}
+                {% capture action_text %}service_more{{ i }}_actiontext{% endcapture %}
+                {% capture link %}service_more{{ i }}_link{% endcapture %}
+                <div class="more-inner col-sm-3">
+                  <div class="more-image">
+                    <img src="{{ section.settings[image] | img_url: '', crop: 'center' }}" alt="" />
+                  </div>
+                  <div class="more-caption">
+                    {{section.settings[caption]}}
+                    <a class="btn" href="{{section.settings[link]}}">{{section.settings[action_text]}}</a>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}           
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if section.settings.service_special_enable %}
+    <div class="special-content">
+      <div class="special-inner">
+        <div class="special-image">
+          <img src="{{ section.settings.service_special | img_url: '', crop: 'center' }}" alt="" />
+        </div>
+        <div class="special-caption">
+          <div class="dis_table">
+            <div class="dis_tablecell">
+              <div class="container">
+                <div class="special-caption-inner">
+                  {{section.settings.service_special_caption}}
+                  <a class="btn" href="{{section.settings.service_special_link}}">{{section.settings.service_special_actiontext}}</a>
+                </div>                
+              </div>              
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+"name": "Services Page",
+"settings": [
+{
+"type": "paragraph",
+"content": "You need create the Page in Admin Panel and set the layout is page.service"
+},
+{
+"type": "header",
+"content": "Our Services"
+},
+{
+"type": "checkbox",
+"id": "service_our_enable",
+"label": "Set active this block"
+},
+{
+"type": "text",
+"id": "service_our_title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "service_our1_icon",
+"label": "Services #1: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our1_caption",
+"label": "Services #1: Caption"
+},
+{
+"type": "text",
+"id": "service_our2_icon",
+"label": "Services #2: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our2_caption",
+"label": "Services #2: Caption"
+},
+{
+"type": "text",
+"id": "service_our3_icon",
+"label": "Services #3: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our3_caption",
+"label": "Services #3: Caption"
+},
+{
+"type": "text",
+"id": "service_our4_icon",
+"label": "Services #4: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our4_caption",
+"label": "Services #4: Caption"
+},
+{
+"type": "text",
+"id": "service_our5_icon",
+"label": "Services #5: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our5_caption",
+"label": "Services #5: Caption"
+},
+{
+"type": "text",
+"id": "service_our6_icon",
+"label": "Services #6: Icon"
+},
+{
+"type": "textarea",
+"id": "service_our6_caption",
+"label": "Services #6: Caption"
+},
+{
+"type": "header",
+"content": "More Services"
+},
+{
+"type": "checkbox",
+"id": "service_more_enable",
+"label": "Set active this block"
+},
+{
+"type": "text",
+"id": "service_more_title",
+"label": "Title"
+},
+{
+"type": "image_picker",
+"id": "service_more1",
+"label": "Services #1: Upload image"
+},
+{
+"type": "textarea",
+"id": "service_more1_caption",
+"label": "Services #1: Caption"
+},
+{
+"type": "text",
+"id": "service_more1_actiontext",
+"label": "Services #1: Action text"
+},
+{
+"type": "url",
+"id": "service_more1_link",
+"label": "Services #1: Link"
+},
+{
+"type": "image_picker",
+"id": "service_more2",
+"label": "Services #2: Upload image"
+},
+{
+"type": "textarea",
+"id": "service_more2_caption",
+"label": "Services #2: Caption"
+},
+{
+"type": "text",
+"id": "service_more2_actiontext",
+"label": "Services #2: Action text"
+},
+{
+"type": "url",
+"id": "service_more2_link",
+"label": "Services #2: Link"
+},
+{
+"type": "image_picker",
+"id": "service_more3",
+"label": "Services #3: Upload image"
+},
+{
+"type": "textarea",
+"id": "service_more3_caption",
+"label": "Services #3: Caption"
+},
+{
+"type": "text",
+"id": "service_more3_actiontext",
+"label": "Services #3: Action text"
+},
+{
+"type": "url",
+"id": "service_more3_link",
+"label": "Services #3: Link"
+},
+{
+"type": "image_picker",
+"id": "service_more4",
+"label": "Services #4: Upload image"
+},
+{
+"type": "textarea",
+"id": "service_more4_caption",
+"label": "Services #4: Caption"
+},
+{
+"type": "text",
+"id": "service_more4_actiontext",
+"label": "Services #4: Action text"
+},
+{
+"type": "url",
+"id": "service_more4_link",
+"label": "Services #4: Link"
+},
+{
+"type": "header",
+"content": "Special Services"
+},
+{
+"type": "checkbox",
+"id": "service_special_enable",
+"label": "Set active this block"
+},
+{
+"type": "image_picker",
+"id": "service_special",
+"label": "Upload background"
+},
+{
+"type": "textarea",
+"id": "service_special_caption",
+"label": "Caption"
+},
+{
+"type": "text",
+"id": "service_special_actiontext",
+"label": "Action text"
+},
+{
+"type": "url",
+"id": "service_special_link",
+"label": "Link"
+}
+]
+}
+{% endschema %}

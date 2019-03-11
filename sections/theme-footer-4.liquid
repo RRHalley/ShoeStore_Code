@@ -1,0 +1,335 @@
+<section class="footer-layout">  
+  <div class="footer-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="footer-content-inner">
+          <div class="footer-content">
+            {% if section.settings.about_enable or section.settings.social_enable %}
+            <div class="about-layout not-animated" data-animate="fadeIn" data-delay="100">
+              {% if section.settings.about_enable %}
+              <div class="logo-content">
+                {% if section.settings.logo_image %}
+                <a href="/"><img src="{{ section.settings.logo_image | img_url: "", crop: '' | split:'?v=' | first }}" alt="{{ section.settings.logo_image.alt }}" title="{{ shop.name }}" /></a>
+                {% endif %}
+                <div class="about-caption">
+                  {{ section.settings.about_caption }}
+                </div>
+              </div>
+              {% endif %}
+              {% if section.settings.social_enable %}
+              <div class="social-content">
+                {% if section.settings.social_facebook_link != blank %}<a href="{{ section.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="cs-icon icon-social-facebook"></i></a>{% endif %}
+                {% if section.settings.social_twitter_link != blank %}<a href="{{ section.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="cs-icon icon-social-twitter"></i></a>{% endif %}            
+                {% if section.settings.social_google_plus_link != blank %}<a href="{{ section.settings.social_google_plus_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Google+' }}" class="icon-social google-plus"><i class="cs-icon icon-social-googleplus"></i></a>{% endif %}                        
+                {% if section.settings.social_pinterest_link != blank %}<a href="{{ section.settings.social_pinterest_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Pinterest' }}" class="icon-social pinterest"><i class="cs-icon icon-social-pinterest"></i></a>{% endif %}
+                {% if section.settings.social_instagram_link != blank %}<a href="{{ section.settings.social_instagram_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Instagram' }}" class="icon-social instagram"><i class="cs-icon icon-social-instagram"></i></a>{% endif %}                                    
+                {% if section.settings.social_youtube_link != blank %}<a href="{{ section.settings.social_youtube_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Youtube' }}" class="icon-social youtube"><i class="cs-icon icon-social-youtube"></i></a>{% endif %}	
+                {% if section.settings.social_wordpress_link != blank %}<a href="{{ section.settings.social_wordpress_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Wordpress' }}" class="icon-social wordpress"><i class="cs-icon icon-social-wordpress"></i></a>{% endif %}
+                {% if section.settings.social_vimeo_link != blank %}<a href="{{ section.settings.social_vimeo_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Vimeo' }}" class="icon-social vimeo"><i class="cs-icon icon-social-vimeo"></i></a>{% endif %}	
+                {% if section.settings.social_tumblr_link != blank %}<a href="{{ section.settings.social_tumblr_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Tumblr' }}" class="icon-social tumblr"><i class="cs-icon icon-social-tumblr"></i></a>{% endif %}
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% if section.settings.link1_enable %}
+            <div class="link-layout not-animated" data-animate="fadeIn" data-delay="200">
+              <div class="link-content">
+                <div class="footer-title">
+                  <h5>{{ section.settings.link1_title }}</h5>
+                </div>
+                <ul>
+                  {% assign list = linklists[section.settings.link1_linklist] %}
+                  {% for link in list.links %}
+                  <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+            {% if section.settings.link2_enable %}
+            <div class="link-layout not-animated" data-animate="fadeIn" data-delay="300">
+              <div class="link-content">
+                <div class="footer-title">
+                  <h5>{{ section.settings.link2_title }}</h5>
+                </div>
+                <ul>
+                  {% assign list = linklists[section.settings.link2_linklist] %}
+                  {% for link in list.links %}
+                  <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+            {% if section.settings.newsletter_enable or section.settings.social_enable %}
+            <div class="newsletter-layout not-animated" data-animate="fadeIn" data-delay="400">
+              {% if section.settings.newsletter_enable %}
+              <div class="newsletter-content">
+                <div class="footer-title">
+                  <h5>{{ section.settings.newsletter_title }}</h5>
+                </div>
+                <p class="newsletter-caption">
+                  {{ section.settings.newsletter_caption }}
+                </p>
+                <div class="newsletter-form">
+                  <form action="{{ section.settings.newsletter_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">                    
+                    <input type="email" class="form-control" value="" name="EMAIL" id="mail" placeholder="{{ section.settings.newsletter_placeholder }}" />
+                    <button type="submit" class="btn_newsletter_send" name="subscribe" id="subscribe"><i class="cs-icon icon-email"></i></button>
+                  </form>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+</section>
+<section class="copy-right-layout">  
+  <div class="copy-right-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="copy-right-inner">
+          <div class="copy-right-content">
+            {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. {{ 'layout.footer.reserved' | t }}
+          </div>
+          {% if section.settings.payment_enable %}
+          <div class="payment-content">
+            <ul class="payment-list">
+              {% if section.settings.american_express %}<li>{% include 'icon-american_express' %}</li>{% endif %}
+              {% if section.settings.apple_pay %}<li>{% include 'icon-apple_pay' %}</li>{% endif %}
+              {% if section.settings.bitcoin %}<li>{% include 'icon-bitcoin' %}</li>{% endif %}
+              {% if section.settings.discover %}<li>{% include 'icon-discover' %}</li>{% endif %}
+              {% if section.settings.jcb %}<li>{% include 'icon-jcb' %}</li>{% endif %}
+              {% if section.settings.maestro %}<li>{% include 'icon-maestro' %}</li>{% endif %}
+              {% if section.settings.master %}<li>{% include 'icon-master' %}</li>{% endif %}
+              {% if section.settings.paypal %}<li>{% include 'icon-paypal' %}</li>{% endif %}
+              {% if section.settings.shopify_pay %}<li>{% include 'icon-shopify_pay' %}</li>{% endif %}
+              {% if section.settings.visa %}<li>{% include 'icon-visa' %}</li>{% endif %}
+            </ul>
+          </div>
+          {% endif %} 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "About Us"
+    },
+    {
+      "type": "checkbox",
+      "id": "about_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Upload logo footer"
+    },
+    {
+      "type": "textarea",
+      "id": "about_caption",
+      "label": "Caption"
+    },
+    {
+      "type": "header",
+      "content": "Social"
+    },
+    {
+      "type": "checkbox",
+      "id": "social_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "social_twitter_link",
+      "label": "Twitter",
+      "info": "https:\/\/twitter.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_facebook_link",
+      "label": "Facebook",
+      "info": "https:\/\/www.facebook.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_pinterest_link",
+      "label": "Pinterest",
+      "info": "https:\/\/www.pinterest.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_google_plus_link",
+      "label": "Google+",
+      "info": "https:\/\/plus.google.com\/+shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram_link",
+      "label": "Instagram",
+      "info": "https:\/\/instagram.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_tumblr_link",
+      "label": "Tumblr",
+      "info": "http:\/\/shopify.tumblr.com"
+    },
+    {
+      "type": "text",
+      "id": "social_youtube_link",
+      "label": "YouTube",
+      "info": "https:\/\/www.youtube.com\/user\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_wordpress_link",
+      "label": "Wordpress",
+      "info": "http:\/\/wordpress.org\/"
+    },
+    {
+      "type": "text",
+      "id": "social_vimeo_link",
+      "label": "Vimeo",
+      "info": "https:\/\/vimeo.com\/shopify"
+    },
+    {
+      "type": "header",
+      "content": "Link list 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "link1_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "link1_title",
+      "label": "Title"
+    },
+    {
+      "type": "link_list",
+      "id": "link1_linklist",
+      "label": "Link list"
+    },
+    {
+      "type": "header",
+      "content": "Link list 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "link2_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "link2_title",
+      "label": "Title"
+    },
+    {
+      "type": "link_list",
+      "id": "link2_linklist",
+      "label": "Link list"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_caption",
+      "label": "Caption"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_action",
+      "label": "Mailchimp form action URL",
+      "info": "[Find your MailChimp form action URL](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/accounts-and-newsletters\/get-a-mailchimp-form-action-url)."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder text"
+    },
+	{
+      "type": "header",
+      "content": "Payment Method"
+    },
+	{
+      "type": "checkbox",
+      "id": "payment_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "checkbox",
+      "id": "american_express",
+      "label": "American Express"
+    },
+    {
+      "type": "checkbox",
+      "id": "apple_pay",
+      "label": "Apple pay"
+    },
+    {
+      "type": "checkbox",
+      "id": "bitcoin",
+      "label": "Bitcoin"
+    },
+    {
+      "type": "checkbox",
+      "id": "discover",
+      "label": "Discover"
+    },
+    {
+      "type": "checkbox",
+      "id": "jcb",
+      "label": "JCB"
+    },
+    {
+      "type": "checkbox",
+      "id": "maestro",
+      "label": "Maestro"
+    },
+    {
+      "type": "checkbox",
+      "id": "master",
+      "label": "Master"
+    },
+    {
+      "type": "checkbox",
+      "id": "paypal",
+      "label": "Paypal"
+    },
+    {
+      "type": "checkbox",
+      "id": "shopify_pay",
+      "label": "Shopify Pay"
+    },
+	{
+      "type": "checkbox",
+      "id": "visa",
+      "label": "Visa"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+<div class="row-container {% if settings.format_image_product == 'angular' %}product-angular{% else %}product-circle{% endif %}">
+  <div class="product home_product">
+    <div class="row-left">
+      <a href="{{ product.url | within: collection }}" class="container_item"> 
+        <div class="hoverBorderWrapper">
+          <img src="{{ product.featured_image | product_img_url: '113px',crop:'center' }}" class="not-rotation img-responsive front" alt="{{ product.featured_image.alt | escape }}" />
+          <div class="mask"></div>
+        </div>        
+      </a>
+    </div>
+    <div class="row-right">      
+      <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title }}</a></div>
+      <div class="rating-star">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <div class="product-price">
+        {% if product.available %}
+        {% if product.compare_at_price_max > product.price %}
+
+        {% assign found_one_in_stock = false %}
+        {% for variant in product.variants %}
+        {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+
+        <span class="price_sale">{{ variant.price | money }}</span>
+        <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
+
+        {% endif %}
+        {% endfor %}
+
+        {% if found_one_in_stock == false %}
+        {% for variant in product.variants %}
+        {% if variant.available and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+        <span class="price">
+          {{ variant.price | money }}
+        </span>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% else %}
+        <span class="price">
+          {% if product.price_varies %} 
+          {{ product.price | money }}
+          {% else %}
+          {{ product.price | money }}
+          {% endif %}
+        </span>
+        {% endif %}  
+        {% else %}
+        <span class="sold_out">Sold Out</span>
+        {% endif %}
+      </div> 
+    </div>   
+  </div>  
+</div> 

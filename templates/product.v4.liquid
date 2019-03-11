@@ -1,0 +1,33 @@
+<section class="heading-content product-heading">  
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">
+              {{ product.title }}
+            </h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                {% if collection %}
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a>
+                {% else %}
+                <a href="/collections/all" title="All Products" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.products' | t }}</span></a>
+                {% endif %}
+              </span>
+              <span class="arrow-space"></span>
+              <strong>{{ product.title }}</strong>
+            </div> 
+          </div>
+        </div>
+      </div>    
+  </div>
+</section>
+
+<section class="product-detail-layout">
+  <div class="product-detail-wrapper">
+     {% section 'product-v4-template' %}
+  </div>
+</section>
+

@@ -1,0 +1,28 @@
+<div class="blog-inner">
+  <div id="blog" class="blog-grid">   
+    {% paginate blog.articles by 9 %}
+    <div class="articles">
+      {% for article in blog.articles %}
+      <div class="col-sm-4 article clearfix">
+        {% if article.image %}       
+        <div class="article-image">          
+          <a href="{{ article.url }}"><img src="{{article.image | img_url: 'master'}}" alt="" /></a>
+        </div>
+        {% endif %}
+        <div class="article-bottom">
+          <span class="blog-title">
+            {{ blog.title }}
+          </span>
+          <div class="article-title">
+            <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2> 
+          </div>
+          <a class="action" href="{{ article.url }}">{{ 'blogs.article.action'| t }}</a>
+        </div>
+      </div> 
+      {% endfor %}
+
+      {% include 'pagination' %}
+    </div>  
+    {% endpaginate %}                        
+  </div>
+</div>

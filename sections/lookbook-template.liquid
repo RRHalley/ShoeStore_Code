@@ -1,0 +1,104 @@
+{% if section.settings.background %}
+<style>
+  .heading-content{
+    background-image:  url({{ section.settings.background | img_url: '', crop: '' }}) !important; 
+  }
+</style>
+{% endif %}
+{% if section.blocks.size > 0 %}
+<div class="lookbook-content-inner">
+  <div class="lookbook-content">
+    {% for block in section.blocks %}
+    {% assign temp = forloop.index %}
+    <div class="lookbook-item">
+      <div class="item">
+        {% for i in (1..3) %}
+        {% capture image %}lookbook_image_{{i}}{% endcapture %}
+        {% if block.settings[image] %}
+        <div class="lb-element">
+          <a class="group-img-{{temp}}" rel="lookbook" href="{{ block.settings[image] | img_url: '', crop: 'center' }}">
+            <img src="{{ block.settings[image] | img_url: '', crop: 'center' }}" alt="lookbook-img" />
+          </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $(".group-img-{{temp}}").fb({
+            'transitionIn'	:	'elastic',
+            'transitionOut'	:	'elastic',
+            'maxHeight'		:  	800,
+            'speedIn'		:	600, 
+            'speedOut'		:	200, 
+            'helpers' : {
+            overlay : {
+            css : {
+            'background' : 'rgba(0, 0, 0, 0.5)'
+            }
+            }
+            }
+            });
+        });
+      </script>
+    </div>    
+    {% endfor %}
+  </div>
+</div>
+<script>
+  $(".lookbook-item .item").owlCarousel({
+    navigation : false,
+    pagination: false,
+    autoPlay: false,
+    items: 1,
+    slideSpeed : 200,
+    paginationSpeed : 800,
+    rewindSpeed : 1000,
+    itemsDesktop : [1199,1],
+    itemsDesktopSmall : [991,1],
+    itemsTablet: [767,1],
+    itemsTabletSmall: [540,1],
+    itemsMobile : [360,1]
+  });
+</script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Lookbook Page",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "You need create the Page in Admin Panel and set the layout is page.lookbook"
+      },
+	  {
+        "type": "image_picker",
+        "id": "background",
+        "label": "Upload background of breadcrumb"
+      }
+	],
+	"blocks": [
+      {
+        "type": "item",
+        "name": "Lookbook Gallery",
+        "settings": [
+		  {
+            "type": "image_picker",
+            "id": "lookbook_image_1",
+            "label": "Upload image 1"
+          },
+		  {
+            "type": "image_picker",
+            "id": "lookbook_image_2",
+            "label": "Upload image 2"
+          },
+		  {
+            "type": "image_picker",
+            "id": "lookbook_image_3",
+            "label": "Upload image 3"
+          }
+		]
+	  }
+	]
+  }
+{% endschema %}

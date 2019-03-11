@@ -1,0 +1,19 @@
+{% if section.settings.background %}
+<style>
+  .title-content{
+    background-image:  url({{ section.settings.background | img_url: '', crop: '' }}); 
+  }
+</style>
+{% endif %}
+{% schema %}
+{
+  "name": "Search Page",
+  "settings": [
+	{
+      "type": "image_picker",
+      "id": "background",
+      "label": "Upload background of breadcrumb"
+	}
+  ]
+}
+{% endschema %}

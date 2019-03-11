@@ -1,0 +1,79 @@
+<div data-section-id="{{ section.id }}" data-section-type="banner-section">
+  <section class="home-banner-layout home-banner-1-layout"
+           {% if section.settings.image %}
+           style="background-image:  url({{ section.settings.image | img_url: '', crop: '' | split:'?v=' | first }})"    
+           {% else %}
+           style="background-image:  url({{ '1920x900.png' | asset_url | split:'?v=' | first }})"     
+           {% endif %}       
+           >    
+    <div class="home-banner-content home-banner-1-content"> 
+      <div class="container">        
+        <div class="banner-caption position-{{ section.settings.caption_text_position }}">
+          <div class="group">
+            <p class="caption">{{ section.settings.title }}</p>
+            <br/>
+            <a class="_btn" href="{{ section.settings.link }}">{{ section.settings.action_text }}</a>
+          </div>
+        </div>
+      </div>            
+    </div>
+    <div class="banner-item">
+      <div class="item-content">
+        <span class="current"></span>
+        <span class="size">/</span>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+"name": "Banner With Style 1",
+"class": "april-section index-section index-section-banner",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "Upload image"
+},
+{
+"type": "textarea",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "action_text",
+"label": "Action text"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link"
+},
+{
+"type": "select",
+"id": "caption_text_position",
+"label": "Set Position for Caption",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "middle",
+"label": "Middle"
+},
+{
+"value": "right",
+"label": "Right"
+}
+],
+"default": "left"
+}
+],
+"presets": [{
+"name": "Banner With Style 1",
+"category": "List Banner"
+}]
+}
+{% endschema %}

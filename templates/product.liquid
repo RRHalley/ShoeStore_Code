@@ -1,0 +1,48 @@
+{% unless settings.product_style == 'v_2' %}
+<section class="heading-content {% unless settings.product_style == 'v_1' %}product-heading{% endunless %}">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          {% unless settings.product_style == 'v_1' %}
+          <h1 class="page-title">
+            {{ product.title }}
+          </h1>
+          {% endunless %}
+          <div class="breadcrumb clearfix">
+            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+            <span class="arrow-space"></span>
+            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+              {% if collection %}
+              <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a>
+              {% else %}
+              <a href="/collections/all" title="All Products" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.products' | t }}</span></a>
+              {% endif %}
+            </span>
+            <span class="arrow-space"></span>
+            <strong>{{ product.title }}</strong>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endunless  %}
+
+
+<section class="product-detail-layout {% if settings.product_style == 'v_2' %}non-heading{% endif %}">
+  <div class="product-detail-wrapper">
+    {% if settings.product_style == 'v_1' %}
+      {% section 'product-v1-template' %}
+    {% elsif settings.product_style == 'v_2' %}
+      {% section 'product-v2-template' %}
+    {% elsif settings.product_style == 'v_3' %}
+      {% section 'product-v3-template' %}
+    {% elsif settings.product_style == 'v_4' %}
+      {% section 'product-v4-template' %}
+    {% else %}
+      {% section 'product-v5-template' %}
+    {% endif %}
+  </div>
+</section>
+

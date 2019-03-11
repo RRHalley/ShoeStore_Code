@@ -1,0 +1,192 @@
+{% assign submenu = l.title | handleize %}
+
+{% if settings.mega1_title == l.title %}
+<li class="nav-item {% if l.active %}active {% endif %} navigation_mobile">
+  <a href="{{ l.url }}" class="menu-mobile-link">
+    {{ l.title }}
+  </a>
+  <a href="javascript:void(0)" class="arrow_sub arrow">
+    <i class="cs-icon icon-ios-plus-empty"></i>
+  </a>  
+  <div class="sub-mega-menu menu-mobile-container" style="display: none;">    
+    <div class="group_collumn_inner">
+      <ul class="group_collumn">
+        {% if settings.mega1_col1_linklist != "" %}
+        <li class="mega-links mega1-collumn">
+          {% assign list = linklists[settings.mega1_col1_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega1_col2_linklist != "" %}
+        <li class="mega-links mega1-collumn">
+          {% assign list = linklists[settings.mega1_col2_linklist] %}
+          <ul>
+            <li class="list-title">{{ list.title }}</li>
+            {% for link in list.links %}
+            <li class="list-unstyled li-sub-mega">
+              <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+        {% if settings.mega1_col3_banner %}
+        <li class="mega-banner mega1-collumn">
+          <img src="{{ settings.mega1_col3_banner | img_url: '' , crop: 'center' | split:'?v=' | first }}" alt="{{ settings.mega1_col3_banner.alt }}" />
+        </li>
+        {% endif %}
+      </ul>    
+    </div>    
+  </div>
+</li>
+{% elsif settings.mega2_title == l.title %}
+<li class="nav-item {% if l.active %}active {% endif %} navigation_mobile">
+  <a href="{{ l.url }}" class="menu-mobile-link">
+    {{ l.title }}
+  </a>
+  <a href="javascript:void(0)" class="arrow_sub arrow">
+    <i class="cs-icon icon-ios-plus-empty"></i>
+  </a>  
+  <ul class="sub-mega-menu menu-mobile-container" style="display: none;">
+    {% if settings.mega2_col1_linklist != "" %}
+    <li class="mega-links mega2-collumn">
+      {% assign list = linklists[settings.mega2_col1_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega2_col2_linklist != "" %}
+    <li class="mega-links mega2-collumn">
+      {% assign list = linklists[settings.mega2_col2_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega2_col3_linklist != "" %}
+    <li class="mega-links mega2-collumn">
+      {% assign list = linklists[settings.mega2_col3_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega2_col4_banner %}
+    <li class="mega-banner mega1-collumn">
+      <img src="{{ settings.mega2_col4_banner | img_url: '' , crop: 'center' | split:'?v=' | first }}" alt="{{ settings.mega2_col4_banner.alt }}" />
+    </li>
+    {% endif %}
+  </ul>
+</li>
+{% elsif settings.mega3_title == l.title %}
+<li class="nav-item {% if l.active %}active {% endif %} navigation_mobile">
+  <a href="{{ l.url }}" class="menu-mobile-link">
+    {{ l.title }}
+  </a>
+  <a href="javascript:void(0)" class="arrow_sub arrow"> 
+    <i class="cs-icon icon-ios-plus-empty"></i>
+  </a> 
+  <ul class="sub-mega-menu menu-mobile-container" style="display: none;">
+    {% if settings.mega3_col1_linklist != "" %}
+    <li class="mega-links mega3-collumn">
+      {% assign list = linklists[settings.mega3_col1_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega3_col2_linklist != "" %}
+    <li class="mega-links mega3-collumn">
+      {% assign list = linklists[settings.mega3_col2_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega3_col3_linklist != "" %}
+    <li class="mega-links mega3-collumn">
+      {% assign list = linklists[settings.mega3_col3_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega3_col4_linklist != "" %}
+    <li class="mega-links mega3-collumn">
+      {% assign list = linklists[settings.mega3_col4_linklist] %}
+      <ul>
+        <li class="list-title">{{ list.title }}</li>
+        {% for link in list.links %}
+        <li class="list-unstyled li-sub-mega">
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+    {% if settings.mega3_col5_banner %}
+    <li class="mega-banner mega3-collumn">
+      <img src="{{ settings.mega3_col5_banner | img_url: '' , crop: 'center' | split:'?v=' | first }}" alt="{{ settings.mega3_col5_banner.alt }}" />
+    </li>
+    {% endif %}
+  </ul>  
+</li>
+{% elsif linklists[submenu].links.size > 0 %}
+<li class="nav-item{% if l.active %} active{% endif %} navigation navigation_mobile">
+  <a href="{{ l.url }}" class="menu-mobile-link">
+    {{ l.title }}
+  </a>
+  <a href="javascript:void(0)" class="arrow_sub arrow">
+    <i class="cs-icon icon-ios-plus-empty"></i>
+  </a>
+  <ul class="menu-mobile-container" style="display: none;">
+    {% for l in linklists[submenu].links %}
+    {% include 'navigation-sub-mobile-links' with forloop.index %}
+    {% endfor %}
+  </ul>
+</li>
+{% else %}
+<li class="nav-item{% if l.active %} active{% endif %}">
+  <a href="{{ l.url }}">
+    {{ l.title }}
+  </a>
+</li>
+{% endif %}

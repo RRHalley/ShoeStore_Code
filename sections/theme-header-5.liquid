@@ -1,0 +1,477 @@
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <section class="top-header">
+    <div class="container clearfix">
+      <div class="row">
+        <div class="top-header-inner">
+          <div class="top-header-content">
+            <div class="top-header-left">
+              <div class="left-content">
+                {% if section.settings.contact_email != '' %}
+                <a class="email" href="mailto:{{ section.settings.contact_email }}">
+                  <span class="cs-icon icon-ios-email-outline"></span>{{ section.settings.contact_email }}
+                </a>
+                {% endif %}
+                {% if section.settings.address_title != '' %}
+                <a class="address" href="{{ section.settings.address_map }}">
+                  <span class="cs-icon icon-ios-paperplane"></span>{{ section.settings.address_title }}
+                </a>
+                {% endif %}
+              </div>
+            </div>
+            <div class="top-header-right">
+              <ul class="unstyled top-menu">
+                {% if shop.customer_accounts_enabled %}
+                {% if customer  %}
+                <li class="toolbar-customer my-account"><a href="/account">{{ 'layout.customer.your_account' | t }}</a></li>
+                <li class="toolbar-customer log-out"><a href="/account/logout">{{ 'layout.customer.logout' | t }}</a></li>
+                {% else %}
+                <li class="toolbar-customer login-account">                    
+                  <span id="loginButton" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                    <i class="sub-dropdown visible-sm visible-md visible-lg"></i>  
+                    <a href="/account/login">{{ 'layout.customer.login' | t }}</a>
+                  </span>                    
+                  <div id="loginBox" class="dropdown-menu text-left">
+                    {% form 'customer_login' %}
+                    <div id="bodyBox">
+                      <ul class="control-container customer-accounts list-unstyled">
+                        <li class="clearfix">
+                          <input type="email" value="" placeholder="{{'layout.header.login_dropdown.placeholder_email'|t}}" name="customer[email]" id="customer_email_box" class="form-control" />
+                        </li>
+                        {% if form.password_needed %}
+                        <li class="clearfix">
+                          <input type="password" value="" placeholder="{{'layout.header.login_dropdown.placeholder_password'|t}}" name="customer[password]" id="customer_password_box" class="form-control password" />
+                        </li>
+                        {% endif %}
+                        <li class="clearfix">
+                          <button class="_btn" type="submit">{{'layout.header.login_dropdown.login'|t}}</button>
+                        </li>    
+                        <li class="clearfix">
+                          <a href="/account/login#recover"> {{'layout.header.login_dropdown.forgot'|t}} ?</a>
+                          <br/>
+                          <a href="/account/register"> {{'layout.header.login_dropdown.create'|t}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    {% endform %}
+                  </div>
+                </li>
+                <li class="toolbar-customer log-out"><a href="/account/register">{{ 'layout.customer.create_account' | t }}</a></li> 
+                {% endif %}
+                {% endif %}
+                {% if settings.show_multiple_currencies %}
+                <li class="currency_group hidden-xs">
+                  <div class="currencies-switcher">
+                    {% include 'currencies-switcher' with settings.currency_style %}
+                  </div>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="main-header">
+    <div class="main-header-wrapper">
+      <div class="container clearfix">
+        <div class="row">
+          <div class="main-header-inner">
+            <div class="nav-group">
+              <div class="nav-logo">
+                {% if section.settings.logo %}
+                <a href="/"><img src="{{ section.settings.logo | img_url: "", crop: '' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+                {% else %}
+                <a href="/"><img src="{{ '191x56.png' | asset_url | split:'?v=' | first }}" alt="{{ section.settings[logo].alt }}"/></a>
+                {% endif %}
+                {% if template == 'index' %}
+                <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+                {% else %}
+                <div style="display:none"><a href="/">{{ shop.name }}</a></div>
+                {% endif %}
+              </div>
+            </div>            
+            <div class="nav-icon">
+              {% if settings.display_search %}
+              <div class="m_search nav-search">
+                <form class="search" action="/search">
+                  <input type="hidden" name="type" value="product" />
+                  <div class="collections-selector">
+                    <select class="single-option-selector" data-option="collection-option" id="collection-option" name="collection">
+                      <option value="all" >{{'general.search.all_collections'|t}}</option>
+                      {% for collection in collections %}                          
+                      {% unless collection.all_products_count == 0 or collection.handle == "frontpage" %}
+                      <option value="{{collection.handle}}">{{collection.title }}</option>
+                      {% endunless %}
+                      {% endfor %}                        
+                    </select>
+                  </div>
+                  <input type="text" name="q" class="search_box" placeholder="{{ 'layout.header.search' | t }}" value="{{ search.terms }}"  />
+                  <button class="search_submit" type="submit">
+                    <i class="cs-icon icon-search"></i>
+                  </button>
+                </form>
+              </div>
+              {% endif %}
+              {% if section.settings.phone_title != '' and section.settings.phone_caption != '' %}
+              <div class="phone-area">
+                <div class="phone-group">
+                  <div class="icon-phone">
+                    <i class="cs-icon icon-android-call"></i>
+                  </div>
+                  <div class="phone-caption">
+                    <span class="title">{{ section.settings.phone_title }}</span>
+                    <br/>
+                    <a href="tel:{{ section.settings.phone_caption | remove: "-" | remove: " " }}">{{ section.settings.phone_caption }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              <div class="icon_cart">
+                <div class="m_cart-group">
+                  <a class="cart dropdown-toggle dropdown-link" data-toggle="dropdown">
+                    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                    <i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+                    <div class="num-items-in-cart">
+                      <div class="items-cart-left">
+                        <i class="cs-icon icon-android-cart"></i>
+                        <span class="number">{{ cart.item_count }}</span>   
+                      </div>
+                      <div class="items-cart-right">
+                        <span class="title-cart">{{ 'layout.header.cart' | t }}</span>
+                        <div class="price-text">
+                          <span class="money">$0.00</span>
+                        </div>      
+                      </div>
+                    </div>
+                  </a>
+                  <div class="dropdown-menu cart-info">                  
+                    <div class="cart-content">
+                      <div class="loading">
+                        <img src="{{'loader.gif' | asset_url}}" alt="" />
+                      </div>
+                    </div>                  
+                  </div>
+                </div>
+              </div>
+            </div>                        
+          </div>
+          <div class="navMobile-navigation">     
+            <div class="nav-icon">
+              <div class="nav-icon-left">
+                <div class="group_navbtn_small group_navbtn_action">              
+                  <a href="javascript:void(0)" class="dropdown-toggle-navigation">                  
+                    <span class="cs-icon icon-menu"></span>
+                    <i class="sub-dropdown1"></i>
+                    <i class="sub-dropdown"></i> 
+                  </a>
+                  <div class="navigation_dropdown_scroll dropdown-menu">
+                    <div class="navigation_dropdown_scroll_group">
+                      <div class="navigation_links_top">
+                        <div class="dropdownMobile-logo">
+                          {% if section.settings.logo %}
+                          <a href="/"><img class="header-logo-image" src="{{ section.settings.logo | img_url: "", crop: 'center' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+                          {% else %}
+                          <div><a href="/">{{ shop.name }}</a></div>
+                          {% endif %}
+                        </div>
+                        <a href="javascript:void(0)" class="close-navigation-dropdown"><span class="cs-icon icon-close"></span></a>
+                      </div>
+                      <ul class="navigation_links_mobile">
+                        {% assign nav_lv = 0 %}
+                        {% for l in linklists[settings.nav_linklist].links %}
+                        {% include 'header-navigation-mobile' %}
+                        {% endfor %}
+                      </ul> 
+                    </div>                  
+                  </div>
+                </div> 
+                {% if settings.display_search %}
+                <div class="m_search search-tablet-icon">
+                  <span class="dropdownMobile-toggle search-dropdown">
+                    <span class="icon-dropdown cs-icon icon-search" data-class="cs-icon icon-search"></span>
+                    <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                    <i class="sub-dropdown visible-sm visible-md visible-lg"></i> 
+                  </span>                    
+                  <div class="m_dropdown-search dropdown-menu search-content">
+                    <form class="search" action="/search">
+                      <input type="hidden" name="type" value="product" />                        
+                      <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}"  />
+                      <span class="search-clear cs-icon icon-close"></span>
+                      <button class="search-submit" type="submit">
+                        <span class="cs-icon icon-search"></span>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                {% endif %} 
+              </div>
+              <div class="navMobile-logo-small">
+                {% if section.settings.logo %}
+                <a href="/"><img class="header-logo-image" src="{{ section.settings.logo | img_url: "", crop: 'center' | split:'?v=' | first }}" alt="{{ section.settings.logo.alt }}" title="{{ shop.name }}" /></a>
+                {% else %}
+                <div><a href="/">{{ shop.name }}</a></div>
+                {% endif %}
+              </div> 
+              <div class="nav-icon-right">
+                <div class="icon_cart">
+                  <div class="m_cart-group">
+                    <a class="cart dropdownMobile-toggle dropdown-link">
+                      <i class="sub-dropdown1 visible-sm visible-md visible-lg"></i>
+                      <i class="sub-dropdown visible-sm visible-md visible-lg"></i>                     
+                      <div class="items-cart">
+                        <div class="num-items-in-cart">
+                          <span class="cs-icon icon-shopping-cart"></span>
+                          <span class="cart_text">                                              
+                            <span class="number">{{ cart.item_count }}</span>                        
+                          </span>
+                        </div>                      
+                      </div>                    
+                    </a>
+                    <div class="dropdown-menu cart-info">                  
+                      <div class="cart-content">
+                        <div class="loading">
+                          <img src="{{'loader.gif' | asset_url}}" alt="" />
+                        </div>
+                      </div>                  
+                    </div>
+                  </div>
+                </div>
+                <div class="icon_info">                    
+                  <a href="javascript:void(0)" class="show-info">
+                    <i class="cs-icon icon-view-list"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="navigation-header">
+    <div class="container clearfix">
+      <div class="row">
+        <div class="main-navigation-inner">
+          <div class="navigation-area">
+            <div class="navigation-right">
+              <ul class="navigation-links">
+                {% for l in linklists[settings.nav_linklist].links %}
+                {% include 'header-navigation' %}
+                {% endfor %}              
+              </ul>  
+            </div>
+            <div class="navigation-left">    
+              <div class="group-navbtn">
+                <a href="/collections/all" class="dropdown-toggle"  data-toggle="dropdown">
+                  <span class="dropdown-toggle">
+                    <i class="cs-icon icon-navicon"></i>
+                    {{settings.cate_title }}
+                  </span>
+                </a>
+                <ul class="navigation-links-right dropdown-menu">
+                  {% for l in linklists[settings.cate_linklist].links %}
+                  <li class="nav-item{% if l.active %} active{% endif %}">
+                    <a href="{{ l.url }}">
+                      <span>{{ l.title }}</span>
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>                  
+              </div> 
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div> 
+  </section>
+  <div class="info-header">
+    <div class="info-header-wrapper">
+      <a href="javascript:void(0)" class="close-info"><span class="cs-icon icon-close"></span></a>
+      <div class="info-header-content">
+        {% if settings.show_multiple_currencies %}
+        <ul class="currencies currencies-content">
+          {% capture codes %},USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK,{% endcapture %}
+          {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+          <li class="currency-{{shop.currency}} active">
+            <a href="javascript:;">{{ shop.currency }}</a>
+            <input type="hidden" value="{{ shop.currency }}" />
+          </li>
+          {% for code in supported_codes %}
+          {% if code != shop.currency and codes contains code %}
+          <li class="currency-{{code}}">
+            <a href="javascript:;">{{ code }}</a>
+            <input type="hidden" value="{{ code }}" />
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+        <!-- Customer Links -->
+        <ul class="unstyled accounts-content">
+          {% if shop.customer_accounts_enabled %}
+          {% if customer  %}
+          <li class="toolbar-customer my-account"><a href="/account">{{ 'layout.customer.your_account' | t }}</a></li>
+          <li class="toolbar-customer log-out"><a href="/account/logout">{{ 'layout.customer.logout' | t }}</a></li>
+          {% else %}
+          <li class="toolbar-customer login-account"><a href="/account/login">{{ 'layout.customer.login' | t }}</a></li>
+          <li class="toolbar-customer register-account"><a href="/account/register">{{ 'layout.customer.create_account' | t }}</a></li>
+          {% endif %}
+          {% endif %}
+          <li class="toolbar-customer wishlist"><a href="/pages/wish-list">{{ 'layout.customer.wishlist' | t }}</a></li>
+          <li class="toolbar-customer compare"><a href="/pages/compare">{{ 'layout.customer.compare' | t }}</a></li>
+        </ul>
+        {% if section.settings.contact_enable %}
+        <div class="info-contact">
+          <h5 class="header-title">{{ section.settings.contact_title }}</h5>
+          <div class="contact-content">
+            {% if section.settings.address_title != '' %}
+            <div class="item">
+              <span>A: </span> <address>{{ section.settings.address_title }}</address>
+            </div>
+            {% endif %}
+            {% if section.settings.phone_caption != '' %}
+            <div class="item">
+              <span>P: </span> <a href="tel:{{ section.settings.phone_caption | remove: "-" | remove: " " }}">{{ section.settings.phone_caption }}</a>
+            </div>
+            {% endif %}
+            {% if section.settings.contact_email != '' %}
+            <div class="item">
+              <span>E: </span><a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if settings.nav_sticky %}
+<script type="text/javascript">
+  function addTopaffix(scr){
+    if($(window).innerWidth() < 992 ){
+      if(scr < 10 ){
+        if($('#top').hasClass('affix-top')){
+          $('#top').removeClass('affix affix-top').removeClass('fadeInDown animated');
+        }
+      }
+      else{
+        if(!$('#top').hasClass('affix-top')){
+          $('#top').addClass('affix affix-top').addClass('fadeInDown animated').removeClass('fadeInUp-affix');
+        }
+      }
+    }
+    else{
+      if(scr < 220 ){
+        if($('#top').hasClass('affix-top')){
+          $('#top').removeClass('affix affix-top').removeClass('fadeInDown animated');
+        }
+      }
+      else{
+        if(!$('#top').hasClass('affix-top')){
+          $('#top').addClass('affix affix-top').addClass('fadeInDown animated').removeClass('fadeInUp-affix');
+        }
+      }
+    }
+  }
+  function addBottomaffix(scr){
+    if($(window).innerWidth() >= 992 ){
+      if(scr > 220 && scr < 320 ){
+        if(!$('#top').hasClass('affix-top')){
+          $('#top').addClass('affix affix-top').addClass('fadeInDown animated').removeClass('fadeInUp-affix');
+        }
+      }
+      else{
+        if($('#top').hasClass('affix-top')){
+          $('#top').removeClass('affix-top').removeClass('fadeInDown animated').addClass('fadeInUp-affix animated');
+        }
+      }
+    }
+    else {
+      if($('#top').hasClass('affix')){
+        $('#top').removeClass('affix-top').removeClass('fadeInDown animated').addClass('fadeInUp-affix animated');
+      }
+    }
+  }
+  var checks = 0;
+  $(window).scroll(function() {
+    var scrollTop = $(this).scrollTop();
+    if(scrollTop > checks){
+      addBottomaffix(scrollTop);
+    }
+    else if(scrollTop < checks){
+      addTopaffix(scrollTop);
+    }
+    checks = scrollTop;
+  });
+  $( window ).resize(function() {
+    var scrollTop = $(this).scrollTop();
+    if(scrollTop > checks){
+      addBottomaffix(scrollTop);
+    }
+    else if(scrollTop < checks){
+      addTopaffix(scrollTop);
+    }
+    checks = scrollTop;
+  });
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo Shop"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "header",
+      "content": "Contact Us"
+    },
+    {
+      "type": "checkbox",
+      "id": "contact_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact Title"
+    },
+	{
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email"
+    },
+	{
+      "type": "text",
+      "id": "address_title",
+      "label": "Address: Title"
+    },
+	{
+      "type": "text",
+      "id": "address_map",
+      "label": "Address: Link Map"
+    },
+	{
+      "type": "text",
+      "id": "phone_title",
+      "label": "Phone: Title"
+    },
+	{
+      "type": "text",
+      "id": "phone_caption",
+      "label": "Phone: Caption"
+    }
+  ]
+}
+{% endschema %}

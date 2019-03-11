@@ -1,0 +1,29 @@
+<div class="related-group article">
+  <div class="related-left">
+    <img src="{{related.image | img_url: '' , crop: 'center'}}" alt="" />
+  </div>
+  <div class="related-right">
+    <div class="article-title">                    
+      <h2 class="article-name"><a href="{{ related.url }}">{{ related.title }}</a></h2>
+    </div>
+    <ul class="article-info list-inline">
+      <li class="article-date"><span>{{article.published_at | date: '%b %d, %Y'}}</span></li> 
+      <li class="article-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span>{{ 'blogs.comments.by' |t }}</span>
+        <span itemprop="name">{{article.author}}</span>
+      </li> 
+      <li class="article-comment">
+        <span>
+          <a href="{{article.url}}#comments">
+            {% assign comments_count1 = article.comments_count %}
+            <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+          </a>
+        </span>
+      </li>                                          
+    </ul>
+    <div id="article-content" class="article-content">
+      {{ related.content | truncatewords: 20 }}
+    </div>
+    <a class="_btn" href="{{ article.url }}">{{ 'blogs.article.action'| t }}</a>
+  </div>
+</div>

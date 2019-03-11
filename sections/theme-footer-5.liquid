@@ -1,0 +1,83 @@
+{% if section.settings.contact_enable %}
+<section class="footer-contact-layout"> 
+  <div class="container">
+    <div class="row">
+      <div class="footer-contact-inner">
+        <div class="footer-contact-content">
+		  <p class="contact-title">{{ section.settings.contact_title }}</p>
+          <a href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+        </div>        
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<section class="footer-copyright-layout"> 
+  <div class="container">
+    <div class="row">
+      <div class="footer-copyright-inner">
+        <div class="footer-copyright-content">
+		  <div class="copyright">{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}{{ 'layout.footer.reserved' | t }}</div>  
+          {% if section.settings.newsletter_enable %}
+          <div class="newsletter">
+            <div class="newsletter-form">
+              <form action="{{ section.settings.newsletter_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">                    
+                <button type="submit" class="btn_newsletter_send" name="subscribe" id="subscribe">
+                  <span>{{ section.settings.newsletter_action_text }}</span>
+                  <i class="cs-icon icon-email"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+          {% endif %}
+        </div>        
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contact Footer"
+    },
+    {
+      "type": "checkbox",
+      "id": "contact_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Set active this block"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_action",
+      "label": "Mailchimp form action URL",
+      "info": "[Find your MailChimp form action URL](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/accounts-and-newsletters\/get-a-mailchimp-form-action-url)."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_action_text",
+      "label": "Action text"
+    }
+  ]
+}
+{% endschema %}
